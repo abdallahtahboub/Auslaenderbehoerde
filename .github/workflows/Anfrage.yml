@@ -1,0 +1,31 @@
+name: Run Selenium Tests
+
+# Schedule this job to run every 5 minutes
+on:
+  schedule:
+    - cron: "*/5 * * * *" # Runs every 5 minutes
+
+  # Optionally, run this workflow on pushes to the main branch
+  push:
+    branches:
+      - main
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # Alternative: 'zulu' or 'adopt'
+        java-version: '11'      # Specify your Java version
+
+    - name: Install Dependencies
+      run: mvn install
+
+    - name: Run Selenium Tests
+      run: mvn test
