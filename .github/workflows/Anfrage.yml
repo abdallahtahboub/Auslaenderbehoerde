@@ -28,25 +28,5 @@ jobs:
 
       - name: Install ChromeDriver
         run: |
-          # Extract the Chrome major version
-          CHROME_VERSION=$(google-chrome --version | sed -E 's/[^0-9]*([0-9]+)\..*/\1/')
-          
-          # Download the latest compatible ChromeDriver for this major version
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          
-          # If CHROMEDRIVER_VERSION is empty, default to latest overall version
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-          fi
-
-          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-
-      - name: Install Dependencies
-        run: mvn install
-
-      - name: Run Selenium Tests
-        run: mvn test
-        env:
-          DISPLAY: :99
+          # Extract the first two parts of the Chrome version
+          CHROME_VERSION=$(google-chrome --version | sed -E 's/[^0-9]*([0-9
