@@ -37,6 +37,7 @@ public class DriverManager extends AbstractTestNGCucumberTests {
                 default:
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--headless");  // Run in headless mode
                     chromeOptions.addArguments("--no-first-run");
                     chromeOptions.addArguments("--disable-search-engine-choice-screen");
                     chromeOptions.addArguments("--no-default-browser-check");
