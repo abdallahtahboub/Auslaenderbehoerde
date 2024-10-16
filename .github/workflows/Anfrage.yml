@@ -26,23 +26,25 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Install ChromeDriver
-        run: |
-          # Extract the first two parts of the Chrome version
-          CHROME_VERSION=$(google-chrome --version | sed -E "s/[^0-9]*([0-9]+\.[0-9]+).*/\1/")
-          
-          # Fetch the compatible ChromeDriver version
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-
-          # Fallback to latest overall if the specific version is not found
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-          fi
-
-          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
+          - name: Setup ChromeDriver
+          run: |
+            # Get Chrome major and minor version
+            CHROME_VERSION=$(google-chrome --version | grep -oP "\d+\.\d+")
+        
+            # Fetch compatible ChromeDriver version for this Chrome version
+            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        
+            # If no version is found, default to latest ChromeDriver release
+            if [ -z "$CHROMEDRIVER_VERSION" ]; then
+              CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+            fi
+        
+            # Download and setup ChromeDriver
+            wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+            unzip chromedriver_linux64.zip -d /tmp/
+            sudo mv /tmp/chromedriver /usr/local/bin/chromedriver
+            sudo chmod +x /usr/local/bin/chromedriver
+          shell: bash
 
       - name: Install Dependencies
         run: mvn install
