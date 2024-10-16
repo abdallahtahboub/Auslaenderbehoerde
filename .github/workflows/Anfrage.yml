@@ -35,7 +35,7 @@ jobs:
 
     # List the directory contents to ensure features are present
     - name: List resources directory
-      run: ls -R src/test/resources
+      run: ls -R src/test/Resources
 
     # Install dependencies and build
     - name: Build with Maven
