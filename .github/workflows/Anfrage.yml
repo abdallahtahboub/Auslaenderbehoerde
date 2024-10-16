@@ -26,10 +26,36 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
+      - name: Install ChromeDriver
+        run: |
+          # Extract the first two parts of the Chrome version
+          CHROME_VERSION=$(google-chrome --version | sed -E "s/[^0-9]*([0-9]+\.[0-9]+).*/\1/")
+          
+          # Fetch the compatible ChromeDriver version
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+
+          # Fallback to latest overall if the specific version is not found
+          if [ -z "$CHROMEDRIVER_VERSION" ]; then
+            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+          fi
+
+          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
       - name: Install Dependencies
         run: mvn install
 
-      - name: Run Selenium Tests
-        run: mvn test
+      - name: Run Selenium Tests with Chrome
+        run: mvn test -Dbrowser=chrome
         env:
           DISPLAY: :99
+          
+      - name: Run Selenium Tests with Firefox (if needed)
+        run: mvn test -Dbrowser=firefox
+        env:
+          DISPLAY: :99
+
+      # Optionally, you can add a step for Safari if running on macOS
+      # You may want to conditionally include this based on the OS.
