@@ -19,6 +19,11 @@
   </properties>
 
   <dependencies>
+      <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>webdrivermanager</artifactId>
+        <version>YOUR_WEBDRIVERMANAGER_VERSION</version>
+    </dependency>
 
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
