@@ -1,11 +1,8 @@
-name: Run Selenium Tests
+nname: Run Selenium Tests
 
-# Schedule this job to run every 5 minutes
 on:
   schedule:
-    - cron: "*/5 * * * *" # Runs every 5 minutes
-
-  # Optionally, run this workflow on pushes to the main branch
+    - cron: "*/5 * * * *"
   push:
     branches:
       - main
@@ -21,11 +18,27 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin' # Alternative: 'zulu' or 'adopt'
-        java-version: '11'      # Specify your Java version
+        distribution: 'temurin'
+        java-version: '11'
+
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+
+    - name: Install ChromeDriver
+      run: |
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        wget "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
 
     - name: Install Dependencies
       run: mvn install
 
     - name: Run Selenium Tests
       run: mvn test
+      env:
+        DISPLAY: :99
+
