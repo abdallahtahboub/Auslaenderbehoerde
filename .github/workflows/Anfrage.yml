@@ -44,4 +44,9 @@ jobs:
           sudo mv chromedriver /usr/local/bin/
 
       - name: Install Dependencies
-        run: mv
+        run: mvn install
+
+      - name: Run Selenium Tests
+        run: mvn test
+        env:
+          DISPLAY: :99
