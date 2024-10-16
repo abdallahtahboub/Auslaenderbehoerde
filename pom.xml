@@ -22,7 +22,7 @@
       <dependency>
         <groupId>io.github.bonigarcia</groupId>
         <artifactId>webdrivermanager</artifactId>
-        <version>YOUR_WEBDRIVERMANAGER_VERSION</version>
+            <version>5.9.2</version>
     </dependency>
 
 <dependency>
