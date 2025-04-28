@@ -4,7 +4,7 @@
 Feature: Status inquiry
    @SendingEmail
    Scenario: Ask for Status
-    When I can open the website 
+    When I can open the auslaender website 
     And choose a reason for the Inquiry 
     And enter E-Mail address 
     And confirm my E-Mail address

@@ -3,7 +3,7 @@ package ui.runners;
 import io.cucumber.testng.CucumberOptions;
 import ui.utils.DriverManager;
 
-@CucumberOptions(features = "src/test/resources/features", glue = "ui.steps", tags = "@inquiry", plugin = {
+@CucumberOptions(features = "src/test/resources/features", glue = "ui.steps", tags = "@whatsapp", plugin = {
                 "pretty",
                 "html:target/cucumber-reports.html" },
 

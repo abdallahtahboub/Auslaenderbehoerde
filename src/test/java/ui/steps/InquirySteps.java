@@ -10,7 +10,7 @@ public class InquirySteps {
         inguirryPage = new InguirryPage();
     }
 
-    @When("I can open the website")
+    @When("I can open the auslaender website")
 
     public void a() {
         inguirryPage.openWebsite();

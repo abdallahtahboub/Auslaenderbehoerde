@@ -50,7 +50,9 @@ public class InguirryPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"submit_1\"]")
     WebElement submitBtn;
 
-    private String website = "https://www.berlin.de/einwanderung/ueber-uns/kontakt/formular.1394756.php#form_1";
+    // URL of the website  "https://www.berlin.de/einwanderung/ueber-uns/kontakt/formular.1394756.php#form_1"
+
+    private String website = "https://www.whatsapp.com";
 
     private String emailAddress = "tahboub252@gmail.com";
     private String fileNumber = "95-20198/23";

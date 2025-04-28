@@ -21,10 +21,10 @@ public class BasePage {
 
     public void open() {
 
-        driver.get("https://www.berlin.de/einwanderung/ueber-uns/kontakt/formular.1394756.php");
+        driver.get("https://www.whatsapp.com");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        waitForVisibility(Human);
-        Human.click();
+        // waitForVisibility(Human);
+        // Human.click();
     }
 
     public BasePage() {

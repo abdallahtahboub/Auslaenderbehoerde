@@ -37,13 +37,14 @@ public class DriverManager extends AbstractTestNGCucumberTests {
                 default:
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--headless");  // Run in headless mode
-                    chromeOptions.addArguments("--no-first-run");
-                    chromeOptions.addArguments("--disable-search-engine-choice-screen");
-                    chromeOptions.addArguments("--no-default-browser-check");
-                    chromeOptions.addArguments("--disable-popup-blocking");
-                    chromeOptions.addArguments(
-                            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+                    // chromeOptions.addArguments("--headless"); // Run in headless mode
+                    // chromeOptions.addArguments("--no-first-run");
+                    // chromeOptions.addArguments("--disable-search-engine-choice-screen");
+                    // chromeOptions.addArguments("--no-default-browser-check");
+                    // chromeOptions.addArguments("--disable-popup-blocking");
+                    // chromeOptions.addArguments(
+                    // "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+                    // (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
                     // Add any Chrome-specific options here
                     driver = new ChromeDriver(chromeOptions);
